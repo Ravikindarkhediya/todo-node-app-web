@@ -22,11 +22,6 @@ dependencies:
   rive:
   connectivity_plus:
 
-#  Notification
-  firebase_core:
-  firebase_messaging:
-  cloud_firestore:
-
   # Utility
   intl: ^0.19.0
 

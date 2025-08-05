@@ -1,4 +1,3 @@
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:todo_nodejs/models/task_model.dart';
@@ -96,8 +95,7 @@ class TaskController extends GetxController {
 
   final Dio _dio = Dio(
     BaseOptions(
-        // baseUrl: 'https://todo-node-kybc.onrender.com',
-        baseUrl: 'http://192.168.1.23:9000',
+        baseUrl: 'https://todo-node-kybc.onrender.com',
         connectTimeout: const Duration(seconds: 10),
         receiveTimeout: const Duration(seconds: 10),
         headers: {'Content-Type': 'application/json'}),
@@ -109,8 +107,6 @@ class TaskController extends GetxController {
 
   // todo: Add Task
   Future<Task?> addTask(Task task) async {
-    final String? token = await FirebaseMessaging.instance.getToken();
-    print('FCM Token: $token');
 
     try {
       isAddLoading.value = true;
@@ -119,7 +115,6 @@ class TaskController extends GetxController {
         'message': task.message,
         'category': task.category,
         'dueDate': task.dueDate?.toIso8601String(),
-        'fcmToken': token,
       });
 
       if (response.statusCode == 201) {
